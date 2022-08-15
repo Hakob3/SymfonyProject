@@ -46,8 +46,11 @@ class Product
     private Collection $productImages;
 
     #[Gedmo\Slug(fields: ['title'])]
-    #[ORM\Column(length: 128, nullable: true)]
+    #[ORM\Column(length: 128, unique: true, nullable: true)]
     private ?string $slug = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -190,6 +193,18 @@ class Product
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

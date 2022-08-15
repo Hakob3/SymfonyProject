@@ -37,6 +37,7 @@ class ProductFormHandler
         $product->setPrice($editProductModel->price);
         $product->setQuantity($editProductModel->quantity);
         $product->setDescription($editProductModel->description);
+        $product->setCategory($editProductModel->category);
         $product->setIsDeleted($editProductModel->isDeleted);
         $product->setIsPublished($editProductModel->isPublished);
 

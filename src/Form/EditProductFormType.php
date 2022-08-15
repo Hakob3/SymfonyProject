@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\DTO\EditProductModel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -61,6 +63,14 @@ class EditProductFormType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control-file'
+                ]
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'label' => 'Category',
+                'choice_label' => 'title',
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
             ->add('isPublished', CheckboxType::class, [

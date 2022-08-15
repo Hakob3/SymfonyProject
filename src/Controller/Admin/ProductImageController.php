@@ -20,8 +20,8 @@ class ProductImageController extends AbstractController
         }
 
         $product = $productImage->getProduct();
-        $productImagesDir = $productManager->getProductImagesDir($product);
 
+        $productImagesDir = $productManager->getProductImagesDir($product);
         $productImageManager->removeImageFromProduct($productImage, $productImagesDir);
 
         return $this->redirectToRoute('admin_product_edit', [

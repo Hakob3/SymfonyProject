@@ -2,6 +2,7 @@
 
 namespace App\Form\DTO;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -42,6 +43,12 @@ class EditProductModel
      * @var string
      */
     public $description;
+
+    /**
+     * @var Category
+     */
+    #[Assert\NotBlank(message: 'Please select a category')]
+    public $category;
 
     /**
      * @var bool
