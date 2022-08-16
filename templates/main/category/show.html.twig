@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 mb-2">
                     <div class="page-title2">
-                        <a class="page-title title-gradient-1">...</a>
+                        <a class="page-title title-gradient-1">{{ category.title }}</a>
                     </div>
                 </div>
             </div>
@@ -28,21 +28,21 @@
                                         <div class="product-item">
                                             <figure class="product-media">
                                                 <span class="product-sale-status sale-status-new">New</span>
-                                                <a href="{{ path('app_product_show', {'uuid': product.uuid}) }}">
+                                                <a href="{{ path('main_product_show', {'uuid': product.uuid}) }}">
                                                     <img
                                                             src="{{ asset('uploads/images/products/' ~ product.id ~ '/' ~ cover.filenameMiddle) }}"
                                                             alt="{{ product.title }}"
                                                             class="product-image">
                                                 </a>
                                                 <div class="product-actions">
-                                                    <a href="#" class="btn-add-to-cart">
+                                                    <a onclick="addProductToCart('{{ product.uuid }}')" href="#" class="btn-add-to-cart">
                                                         add to cart
                                                     </a>
                                                 </div>
                                             </figure>
                                             <div class="product-card-content">
                                                 <h3 class="product-title">
-                                                    <a href="{{ path('app_product_show', {'uuid': product.uuid}) }}">{{ product.title }}</a>
+                                                    <a href="{{ path('main_product_show', {'uuid': product.uuid}) }}">{{ product.title }}</a>
                                                 </h3>
                                                 <div class="product-price justify-content-center">
                                                     ${{ product.price }}
@@ -58,4 +58,19 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        const urlSaveProductToCart = '{{ path('main_api_cart_save') }}';
+
+        function addProductToCart(uuid){
+            const formData = new FormData();
+            formData.append('productId', uuid);
+
+            axios.post(urlSaveProductToCart, formData)
+        }
+    </script>
 {% endblock %}
