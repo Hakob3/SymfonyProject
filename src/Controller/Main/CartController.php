@@ -20,4 +20,19 @@ class CartController extends AbstractController
             'cart' => $cart,
         ]);
     }
+
+    #[Route('/cart/create', name: 'main_cart_create')]
+    public function create(Request $request, CartRepository $cartRepository): Response
+    {
+        $phpSessionId = $request->cookies->get('PHPSESSID');
+        $cart = $cartRepository->findOneBy(['sessionId' => $phpSessionId]);
+
+        dd($phpSessionId, $cart);
+
+        return $this->redirectToRoute('main_cart_show');
+
+        return $this->render('main/cart/show.html.twig', [
+            'cart' => $cart,
+        ]);
+    }
 }
